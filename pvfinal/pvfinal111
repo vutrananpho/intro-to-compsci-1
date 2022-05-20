@@ -1,0 +1,156 @@
+/** File: PVfinal111.java @ Pho Vu // completed on Friday, May 20th, 2022
+ * Generate the matrix[3][3] with random integers in {0,1,2}[points: 2]
+ * Print matrix [3][3][points: 1]
+ * Display the first diagonal[points: 2]
+ * Print the colors corresponding to the first diagonal[ points: 2]
+ * Check if the colors repeat or not[ points: 2]
+ * Ask user to draw the colored squares (y/n)? (Should also work for Y)[points:1]
+ * Draw the canvas with 300 x 300 pixels [points:1]
+ * Draw the grid with 3 squares with the colors on the diagonal[points:2]
+ * Program compiles [points:1]
+ * Send in time [points:1]
+ * Send correctly (upload in Moodle final just the java file) [points:1]
+ * Has comments and keeps the format below from the examples [points:1]
+ * Write in your file on the first line: filename and your full name
+ */
+
+import java.util.*; // install java functions from util package | for reading
+
+public class PVfinal111 { //start class
+    static void read(int [][] M) { // create matrix
+        int n = M.length; //set integer variable for length of matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                M[i][j] = (int)(Math.random() *3); //randomize matrix's properties
+            } //end for2
+        }//end for1
+    } //end read
+
+    static void print(int[][] M) { //display the matrix
+        int n = M.length; //set integer variable for length of matrix
+        System.out.println("Display matrix: ");
+        for (int i = 0; i < n; i++) { //set number of rows
+            for (int j = 0; j < n; j++) { //set number of columns
+                System.out.print(M[i][j] + "\t");
+            }
+            System.out.println();
+        } //
+    } //end print
+
+    static void diagonal(int [][] M) { //print the first diagonal
+        int n = M.length; //set integer variable for length of matrix
+        System.out.print("Diagonal: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(M[i][i] + " ");
+        }
+        System.out.println();
+    } //end diagonal
+
+    static void corresponding(int [][] M) { //check color
+        String color = ""; //set string value for color detected
+        int n = M.length; //set integer variable for length of matrix
+        System.out.print("Corresponding: ");
+        for (int i = 0; i < n; i++) {
+            if (M[i][i] == 0) { // 0 = red
+                color = "red";
+            } else if (M[i][i] == 1) { // 1 = green
+                color = "green";
+            } else {
+                color = "blue"; // the rest = blue
+            } //end if
+            System.out.print(color + " ");
+        } //end for
+        System.out.println();
+    } //end corresponding
+
+    static void checkrepeat(int [][] M) { // check if any color repeats
+        int n = M.length; //set integer variable for length of matrix
+        int count = 0; //set variable for counting purpose
+        String a = ""; //set string variable for "true" and "false" entities
+        System.out.print("Colors repeat: ");
+        for (int i = 0; i < n-1; i++) { //start for1
+            for (int j = i + 1; j < n; j++) {
+                if (M[i][i] == M[j][j]) {
+                    count++;
+                } //end for2
+            }
+        } //end for1
+        if (count != 0) { //when there's one or more detected repeat case
+            a = "true";
+        }
+        else { //vice versa
+            a = "false";
+        }
+        System.out.println(a);
+    } //end checkrepeat
+
+    static void request(int [][] M) { //draw colored squares diagonally (RGB convention)
+        int n = M.length; //set integer variable for length of matrix
+        System.out.print("Do you wish to draw(y/n)? "); //display questions
+        Scanner cin = new Scanner(System.in); //create Scanner object
+        String ans = ""; //
+        ans = cin.nextLine(); //ask for user's input
+        if (ans.equals("y") || ans.equals("Y")) {
+            int width = 300; int height = 300; //set integer value for width (x=300) & height (y=300)
+            StdDraw.setCanvasSize(width,height); //change coordinate system
+            StdDraw.setXscale(0,width); //set x-axis
+            StdDraw.setYscale(0,height); //set y-axis
+            for (int i = 0; i < n; i++) { //start for
+                //color for 1st asser
+                if(M[i][i] == 0 && i == 0) { //start if statement
+                    StdDraw.setPenColor(255, 0, 0);
+                    StdDraw.filledSquare(0, 300, 100);
+                } //end if1
+                if(M[i][i] == 1 && i == 0) {
+                    StdDraw.setPenColor(0, 255, 0);
+                    StdDraw.filledSquare(0, 300, 100);
+                } //end if2
+                if(M[i][i] == 2 && i == 0) {
+                    StdDraw.setPenColor(0, 0, 255);
+                    StdDraw.filledSquare(0, 300, 100);
+                } //end if3
+
+                //color for 2nd asset
+                if(M[i][i] == 0 && i == 1) {
+                    StdDraw.setPenColor(255, 0, 0);
+                    StdDraw.filledSquare(150, 150, 50);
+                } //end if4
+                if(M[i][i] == 1 && i == 1) {
+                    StdDraw.setPenColor(0, 255, 0);
+                    StdDraw.filledSquare(150, 150, 50);
+                } //end if5
+                if(M[i][i] == 2 && i == 1) {
+                    StdDraw.setPenColor(0, 0, 255);
+                    StdDraw.filledSquare(150, 150, 50);
+                } //end if6
+
+                //color for 3rd asser
+                if(M[i][i] == 0 && i == 2) {
+                    StdDraw.setPenColor(255, 0, 0);
+                    StdDraw.filledSquare(300, 0, 100);
+                } //end if7
+                if(M[i][i] == 1 && i == 2) {
+                    StdDraw.setPenColor(0, 255, 0);
+                    StdDraw.filledSquare(300, 0, 100);
+                } ////end if8
+                if(M[i][i] == 2 && i == 2) {
+                    StdDraw.setPenColor(0, 0, 255);
+                    StdDraw.filledSquare(300, 0, 100);
+                } //end if9
+            } //end for
+        }
+        else { //when input is anything but "y" or "Y"
+            System.out.println("Goodbye");
+        }
+    } //end request
+
+    public static void main(String[] args) { //start main | driver program
+        int[][] M = new int[3][3]; //set matrix
+        read(M); //activate read()
+        print(M); //activate print()
+        diagonal(M); //activate print()
+        corresponding(M); //activate corresponding()
+        checkrepeat(M); //activate checkrepeat()
+        request(M); //activate request()
+    } //end main
+} //end class
